@@ -43,8 +43,8 @@ function overlaySvg() {
 
 function mountPanels() {
   const defs = [
-    { id: 'panel-a', variant: 'A', label: 'Panel kiri' },
-    { id: 'panel-b', variant: 'B', label: 'Panel kanan' },
+    { id: 'panel-a', variant: 'A', label: 'Left panel' },
+    { id: 'panel-b', variant: 'B', label: 'Right panel' },
   ];
   panels = defs.map(({ id, variant }) => {
     const el = document.getElementById(id);
@@ -146,7 +146,7 @@ function onPick(diff, pt, panelEl) {
   }
   if (diff && state.found.has(diff.id)) {
     // Re-clicking a found difference: gentle reminder, no penalty.
-    floatScore(panelEl, pt.x, pt.y, 'Sudah ketemu', true);
+    floatScore(panelEl, pt.x, pt.y, 'Already found', true);
     return;
   }
   // A miss: small penalty, a red ripple, and the counter stays honest.

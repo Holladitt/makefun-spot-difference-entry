@@ -7,7 +7,7 @@
 export const DIFFS = [
   {
     id: 'lantern-missing',
-    short: 'Lentera',
+    short: 'Lantern',
     key: 'lantern',
     label: 'A paper lantern is missing from the string lights',
     x: 212,
@@ -16,7 +16,7 @@ export const DIFFS = [
   },
   {
     id: 'window-shape',
-    short: 'Jendela',
+    short: 'Window',
     key: 'window',
     label: 'The ramen stall window changed shape',
     x: 178,
@@ -25,7 +25,7 @@ export const DIFFS = [
   },
   {
     id: 'cat-scarf',
-    short: 'Syal kucing',
+    short: 'Cat scarf',
     key: 'scarf',
     label: 'The cat lost its red scarf',
     x: 332,
@@ -43,7 +43,7 @@ export const DIFFS = [
   },
   {
     id: 'sign-star',
-    short: 'Bintang',
+    short: 'Star',
     key: 'star',
     label: 'The star on the ramen sign is gone',
     x: 178,
@@ -52,7 +52,7 @@ export const DIFFS = [
   },
   {
     id: 'umbrella-color',
-    short: 'Payung',
+    short: 'Umbrella',
     key: 'umbrella',
     label: 'The stall umbrella changed colour',
     x: 562,
@@ -61,7 +61,7 @@ export const DIFFS = [
   },
   {
     id: 'flower-missing',
-    short: 'Bunga',
+    short: 'Flower pot',
     key: 'flower',
     label: 'A potted flower by the flower shop is missing',
     x: 832,
@@ -70,7 +70,7 @@ export const DIFFS = [
   },
   {
     id: 'clock-hands',
-    short: 'Jam',
+    short: 'Clock hands',
     key: 'clock',
     label: 'The clock tower shows a different time',
     x: 862,

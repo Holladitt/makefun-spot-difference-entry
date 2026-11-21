@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,35 +20,35 @@
       </svg>
       <div>
         <h1>MIDNIGHT <span>MARKET</span></h1>
-        <small>SPOT THE DIFFERENCE · PASAR MALAM</small>
+        <small>SPOT THE DIFFERENCE · NIGHT MARKET</small>
       </div>
     </div>
     <div class="hud" role="status" aria-live="polite">
-      <div class="stat"><span class="label">Tersisa</span><span class="value" id="counter">8 / 8</span></div>
-      <div class="stat timer"><span class="label">Waktu</span><span class="value" id="timer">3:00</span></div>
-      <div class="stat"><span class="label">Skor</span><span class="value" id="score">0</span></div>
-      <button class="btn" id="hint-btn" type="button" title="Sorot satu perbedaan yang belum ketemu (H)">💡 Hint ×<span id="hints-left">3</span></button>
-      <button class="btn" id="mute-btn" type="button" aria-pressed="false">🔊 Suara hidup</button>
-      <button class="btn" id="restart-btn" type="button" title="Mulai ulang (R)">↻ Ulang</button>
+      <div class="stat"><span class="label">Remaining</span><span class="value" id="counter">8 / 8</span></div>
+      <div class="stat timer"><span class="label">Time</span><span class="value" id="timer">3:00</span></div>
+      <div class="stat"><span class="label">Score</span><span class="value" id="score">0</span></div>
+      <button class="btn" id="hint-btn" type="button" title="Highlight one difference you haven't found yet (H)">💡 Hint ×<span id="hints-left">3</span></button>
+      <button class="btn" id="mute-btn" type="button" aria-pressed="false">🔊 Sound on</button>
+      <button class="btn" id="restart-btn" type="button" title="Restart (R)">↻ Restart</button>
     </div>
   </header>
 
   <main class="panels">
-    <div class="panel" id="panel-a" tabindex="0" role="button" aria-label="Panel kiri: klik perbedaan yang kamu temukan, atau gerakkan kursor dengan panah lalu tekan Enter">
+    <div class="panel" id="panel-a" tabindex="0" role="button" aria-label="Left panel: click the differences you find, or move the cursor with the arrow keys and press Enter">
       <div class="scene"></div>
-      <span class="panel-tag">A · KIRI</span>
+      <span class="panel-tag">A · LEFT</span>
     </div>
     <div class="vs-badge" aria-hidden="true">VS</div>
-    <div class="panel" id="panel-b" tabindex="0" role="button" aria-label="Panel kanan: klik perbedaan yang kamu temukan, atau gerakkan kursor dengan panah lalu tekan Enter">
+    <div class="panel" id="panel-b" tabindex="0" role="button" aria-label="Right panel: click the differences you find, or move the cursor with the arrow keys and press Enter">
       <div class="scene"></div>
-      <span class="panel-tag">B · KANAN</span>
+      <span class="panel-tag">B · RIGHT</span>
     </div>
   </main>
 
   <div class="progress">
-    <span class="cap">Kemajuan</span>
-    <span id="dots" aria-label="Perbedaan yang sudah ditemukan"></span>
-    <span class="hint">Klik perbedaan di kedua panel · <kbd>←↑↓→</kbd> gerakkan kursor · <kbd>Enter</kbd> pilih · <kbd>H</kbd> hint · <kbd>R</kbd> ulang</span>
+    <span class="cap">Progress</span>
+    <span id="dots" aria-label="Differences found so far"></span>
+    <span class="hint">Click the differences on both panels · <kbd>←↑↓→</kbd> move cursor · <kbd>Enter</kbd> select · <kbd>H</kbd> hint · <kbd>R</kbd> restart</span>
   </div>
 
   <div class="found-list" id="found-list" aria-label="Daftar perbedaan"></div>
@@ -56,42 +56,42 @@
   <div class="screen" id="screen-start">
     <div class="card">
       <h2>MIDNIGHT <span>MARKET</span></h2>
-      <p class="sub">Pasar malam Jepang di bawah hujan — dua gambar yang hampir sama, delapan perbedaan yang bersembunyi.</p>
+      <p class="sub">A Japanese night market in the rain — two nearly identical pictures, eight hidden differences.</p>
       <ul class="rules">
-        <li>Temukan <b>8 perbedaan</b> antara panel kiri dan kanan.</li>
-        <li>Klik di <b>kedua panel</b> — perbedaan yang sama ada di keduanya.</li>
-        <li>Kamu punya <b>3:00 menit</b> dan <b>3 hint</b>. Klik yang salah mengurangi skor.</li>
-        <li>Setiap temuan bernilai <b>+100</b>; sisa waktu jadi bonus di akhir.</li>
+        <li>Find <b>8 differences</b> between the left and right panels.</li>
+        <li>Click on <b>both panels</b> — the same difference appears in each one.</li>
+        <li>You have <b>3:00 minutes</b> and <b>3 hints</b>. A wrong click lowers your score.</li>
+        <li>Each find is worth <b>+100</b>; leftover time becomes a bonus at the end.</li>
       </ul>
-      <button class="btn primary" id="start-btn" type="button">▶ Mulai Bermain</button>
-      <p class="controls">Mouse atau keyboard: <kbd>←↑↓→</kbd> kursor · <kbd>Enter</kbd> pilih · <kbd>H</kbd> hint · <kbd>R</kbd> ulang · <kbd>M</kbd> suara</p>
+      <button class="btn primary" id="start-btn" type="button">▶ Start Playing</button>
+      <p class="controls">Mouse or keyboard: <kbd>←↑↓→</kbd> cursor · <kbd>Enter</kbd> select · <kbd>H</kbd> hint · <kbd>R</kbd> restart · <kbd>M</kbd> sound</p>
     </div>
   </div>
 
   <div class="screen hidden" id="screen-win">
     <div class="card">
       <div class="win-badge" aria-hidden="true">🏮</div>
-      <h2>SELAMAT! <span>🎉</span></h2>
-      <p class="sub">Kamu menemukan semua 8 perbedaan di Midnight Market.</p>
+      <h2>YOU DID IT! <span>🎉</span></h2>
+      <p class="sub">You found all 8 differences in Midnight Market.</p>
       <div class="stats">
-        <div class="stat"><span class="label">Waktu</span><span class="value" id="win-time">0:00</span></div>
-        <div class="stat"><span class="label">Skor akhir</span><span class="value" id="win-score">0</span></div>
-        <div class="stat"><span class="label">Akurasi</span><span class="value" id="win-acc">0%</span></div>
+        <div class="stat"><span class="label">Time</span><span class="value" id="win-time">0:00</span></div>
+        <div class="stat"><span class="label">Final score</span><span class="value" id="win-score">0</span></div>
+        <div class="stat"><span class="label">Accuracy</span><span class="value" id="win-acc">0%</span></div>
       </div>
       <p class="sub" id="win-bonus"></p>
-      <button class="btn primary" id="play-again-btn" type="button">↻ Main Lagi</button>
+      <button class="btn primary" id="play-again-btn" type="button">↻ Play Again</button>
     </div>
   </div>
 
   <div class="screen hidden" id="screen-timeout">
     <div class="card">
-      <h2>WAKTU <span>HABIS</span></h2>
-      <p class="sub">Lentera pasar mulai padam… kamu menemukan <b id="timeout-found">0 / 8</b> perbedaan.</p>
-      <button class="btn primary" id="retry-btn" type="button">↻ Coba Lagi</button>
+      <h2>TIME'S <span>UP</span></h2>
+      <p class="sub">The market lanterns are going out… you found <b id="timeout-found">0 / 8</b> differences.</p>
+      <button class="btn primary" id="retry-btn" type="button">↻ Try Again</button>
     </div>
   </div>
 
-  <footer>MIDNIGHT MARKET · sebuah game spot-the-difference original · semua gambar digambar dengan kode</footer>
+  <footer>MIDNIGHT MARKET · an original spot-the-difference game · all artwork drawn in code</footer>
 </div>
 <script type="module" src="src/main.js"></script>
 </body>

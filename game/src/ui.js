@@ -8,7 +8,7 @@ const $ = (id) => document.getElementById(id);
 // Update every HUD field from the current game state.
 export function updateHud(state) {
   const remaining = state.total - state.found.size;
-  $('counter').textContent = `Tersisa ${remaining} / ${state.total}`;
+  $('counter').textContent = `Remaining ${remaining} / ${state.total}`;
   $('score').textContent = String(state.score);
   $('hints-left').textContent = String(state.hintsLeft);
   $('timer').textContent = formatTime(state.timeLeft);
@@ -65,7 +65,7 @@ export function showScreen(name, stats) {
     $('win-time').textContent = formatTime(stats.timeUsed);
     $('win-score').textContent = String(stats.score);
     $('win-acc').textContent = `${stats.accuracy}%`;
-    $('win-bonus').textContent = `+${stats.bonus} bonus waktu`;
+    $('win-bonus').textContent = `+${stats.bonus} time bonus`;
   }
   if (name === 'timeout' && stats) {
     $('timeout-found').textContent = `${stats.found} / ${stats.total}`;
@@ -73,7 +73,7 @@ export function showScreen(name, stats) {
 }
 
 export function setMuteButton(muted) {
-  $('mute-btn').textContent = muted ? '🔇 Suara mati' : '🔊 Suara hidup';
+  $('mute-btn').textContent = muted ? '🔇 Sound off' : '🔊 Sound on';
   $('mute-btn').setAttribute('aria-pressed', String(muted));
 }
 
