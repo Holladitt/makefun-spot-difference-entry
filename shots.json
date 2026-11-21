@@ -1,1 +1,1 @@
-[{"name":"1-cover.jpg","query":"?shot=play&found=3"},{"name":"2-play.jpg","query":"?shot=play&found=6"},{"name":"3-start.jpg","query":"?shot=start"},{"name":"4-win.jpg","query":"?shot=win"}]
+[{"name":"1-cover.jpg","query":"?shot=play&scene=1&found=3"},{"name":"2-play.jpg","query":"?shot=play&scene=2&found=4"},{"name":"3-start.jpg","query":"?shot=start"},{"name":"4-win.jpg","query":"?shot=win"}]

@@ -20,18 +20,21 @@
       </svg>
       <div>
         <h1>MIDNIGHT <span>MARKET</span></h1>
-        <small>SPOT THE DIFFERENCE · NIGHT MARKET</small>
+        <small>SPOT THE DIFFERENCE · 3 SCENES · 24 DIFFERENCES</small>
       </div>
     </div>
     <div class="hud" role="status" aria-live="polite">
+      <div class="stat scene-stat"><span class="label">Scene</span><span class="value scene-value" id="scene-label">Scene 1 of 3 · Midnight Market</span></div>
       <div class="stat"><span class="label">Remaining</span><span class="value" id="counter">8 / 8</span></div>
       <div class="stat timer"><span class="label">Time</span><span class="value" id="timer">3:00</span></div>
       <div class="stat"><span class="label">Score</span><span class="value" id="score">0</span></div>
+      <div class="stat" id="streak-stat"><span class="label">Streak</span><span class="value" id="streak">×0</span></div>
       <button class="btn" id="hint-btn" type="button" title="Highlight one difference you haven't found yet (H)">💡 Hint ×<span id="hints-left">3</span></button>
       <button class="btn" id="mute-btn" type="button" aria-pressed="false">🔊 Sound on</button>
-      <button class="btn" id="restart-btn" type="button" title="Restart (R)">↻ Restart</button>
+      <button class="btn" id="restart-btn" type="button" title="Restart this scene (R)">↻ Restart</button>
     </div>
   </header>
+  <div class="timebar" aria-hidden="true"><div class="timebar-fill" id="timebar-fill"></div></div>
 
   <main class="panels">
     <div class="panel" id="panel-a" tabindex="0" role="button" aria-label="Left panel: click the differences you find, or move the cursor with the arrow keys and press Enter">
@@ -51,20 +54,38 @@
     <span class="hint">Click the differences on both panels · <kbd>←↑↓→</kbd> move cursor · <kbd>Enter</kbd> select · <kbd>H</kbd> hint · <kbd>R</kbd> restart</span>
   </div>
 
-  <div class="found-list" id="found-list" aria-label="Daftar perbedaan"></div>
+  <div class="found-list" id="found-list" aria-label="Differences found in this scene"></div>
 
   <div class="screen" id="screen-start">
-    <div class="card">
+    <div class="card wide">
       <h2>MIDNIGHT <span>MARKET</span></h2>
-      <p class="sub">A Japanese night market in the rain — two nearly identical pictures, eight hidden differences.</p>
+      <p class="sub">Three Japanese night scenes, two nearly identical pictures each — 24 hidden differences in all.</p>
+      <div class="level-cards" id="level-cards"></div>
+      <button class="btn primary" id="play-all-btn" type="button">▶ Play All 3 Scenes</button>
       <ul class="rules">
-        <li>Find <b>8 differences</b> between the left and right panels.</li>
-        <li>Click on <b>both panels</b> — the same difference appears in each one.</li>
-        <li>You have <b>3:00 minutes</b> and <b>3 hints</b>. A wrong click lowers your score.</li>
-        <li>Each find is worth <b>+100</b>; leftover time becomes a bonus at the end.</li>
+        <li>Find <b>8 differences</b> in each scene, on <b>both panels</b>.</li>
+        <li>Finds in a row build a <b>streak</b> — each streak level adds <b>+20</b> points. A miss breaks it.</li>
+        <li>You have <b>3 hints</b> per scene. A wrong click costs <b>10</b> points.</li>
+        <li>Each find is worth <b>+100</b>; leftover time becomes a bonus at the end of each scene.</li>
       </ul>
-      <button class="btn primary" id="start-btn" type="button">▶ Start Playing</button>
       <p class="controls">Mouse or keyboard: <kbd>←↑↓→</kbd> cursor · <kbd>Enter</kbd> select · <kbd>H</kbd> hint · <kbd>R</kbd> restart · <kbd>M</kbd> sound</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="screen-scene">
+    <div class="card">
+      <div class="win-badge" aria-hidden="true">🎉</div>
+      <h2>SCENE <span>CLEAR!</span></h2>
+      <p class="sub">You found all 8 differences in <b id="sc-name">Midnight Market</b>.</p>
+      <div class="stats">
+        <div class="stat"><span class="label">Time</span><span class="value" id="sc-time">0:00</span></div>
+        <div class="stat"><span class="label">Scene score</span><span class="value" id="sc-score">0</span></div>
+        <div class="stat"><span class="label">Accuracy</span><span class="value" id="sc-acc">0%</span></div>
+        <div class="stat"><span class="label">Best streak</span><span class="value" id="sc-streak">×0</span></div>
+      </div>
+      <p class="sub" id="sc-bonus"></p>
+      <button class="btn primary" id="next-scene-btn" type="button">Next Scene →</button>
+      <p class="controls"><button class="btn link" id="sc-levels-btn" type="button">Back to Level Select</button></p>
     </div>
   </div>
 
@@ -72,26 +93,30 @@
     <div class="card">
       <div class="win-badge" aria-hidden="true">🏮</div>
       <h2>YOU DID IT! <span>🎉</span></h2>
-      <p class="sub">You found all 8 differences in Midnight Market.</p>
+      <p class="sub" id="win-sub">You found every difference in every scene.</p>
       <div class="stats">
         <div class="stat"><span class="label">Time</span><span class="value" id="win-time">0:00</span></div>
         <div class="stat"><span class="label">Final score</span><span class="value" id="win-score">0</span></div>
         <div class="stat"><span class="label">Accuracy</span><span class="value" id="win-acc">0%</span></div>
+        <div class="stat"><span class="label">Best streak</span><span class="value" id="win-streak">×0</span></div>
       </div>
       <p class="sub" id="win-bonus"></p>
+      <div class="breakdown" id="win-breakdown"></div>
       <button class="btn primary" id="play-again-btn" type="button">↻ Play Again</button>
+      <p class="controls"><button class="btn link" id="win-levels-btn" type="button">Back to Level Select</button></p>
     </div>
   </div>
 
   <div class="screen hidden" id="screen-timeout">
     <div class="card">
       <h2>TIME'S <span>UP</span></h2>
-      <p class="sub">The market lanterns are going out… you found <b id="timeout-found">0 / 8</b> differences.</p>
+      <p class="sub">The lanterns are going out in <b id="timeout-scene">Midnight Market</b>… you found <b id="timeout-found">0 / 8</b> differences.</p>
       <button class="btn primary" id="retry-btn" type="button">↻ Try Again</button>
+      <p class="controls"><button class="btn link" id="timeout-levels-btn" type="button">Back to Level Select</button></p>
     </div>
   </div>
 
-  <footer>MIDNIGHT MARKET · an original spot-the-difference game · all artwork drawn in code</footer>
+  <footer>MIDNIGHT MARKET · an original spot-the-difference game · 3 scenes · all artwork drawn in code</footer>
 </div>
 <script type="module" src="src/main.js"></script>
 </body>

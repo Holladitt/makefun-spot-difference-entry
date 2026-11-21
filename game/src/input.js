@@ -3,7 +3,8 @@
 // panel's rendered size, so hitboxes stay correct at any viewport size.
 // Keyboard play moves a visible crosshair with the arrow keys and confirms
 // with Enter or Space, so the whole game is playable without a mouse.
-import { hitDiff } from './differences.js';
+// The hit test comes from the caller (handlers.hitTest) because the active
+// scene changes; input.js never knows which scene is showing.
 
 const STEP = 18; // scene units per arrow press
 const STEP_BIG = 54; // with Shift held
@@ -29,8 +30,9 @@ export function createCrosshair() {
 }
 
 // Wire one panel (the div wrapping a scene SVG + overlay + crosshair).
-// handlers: { onPick(diff|null, point, panel), onKey(action) } where action
-// is 'hint' | 'restart' | 'mute' for the global shortcuts.
+// handlers: { onPick(diff|null, point, panel), onKey(action),
+// hitTest(x, y) } where action is 'hint' | 'restart' | 'mute' for the
+// global shortcuts.
 export function bindPanel(panelEl, svgEl, handlers) {
   const cross = panelEl.querySelector('.crosshair');
   let pos = { x: 500, y: 300 };
@@ -50,18 +52,21 @@ export function bindPanel(panelEl, svgEl, handlers) {
   }
 
   // Mouse: clicking anywhere on the panel tests the point against the
-  // differences and reports the result.
+  // differences and reports the result. The scene SVG is looked up live
+  // on every event: changing scenes replaces the SVG element.
   panelEl.addEventListener('pointerdown', (evt) => {
-    const pt = scenePointFromEvent(evt, svgEl);
+    const svg = panelEl.querySelector('.scene svg');
+    const pt = scenePointFromEvent(evt, svg);
     if (!pt) return;
     pos = pt;
     placeCross();
     showCross();
-    handlers.onPick(hitDiff(pt.x, pt.y), pt, panelEl);
+    handlers.onPick(handlers.hitTest(pt.x, pt.y), pt, panelEl);
   });
 
   panelEl.addEventListener('pointermove', (evt) => {
-    const pt = scenePointFromEvent(evt, svgEl);
+    const svg = panelEl.querySelector('.scene svg');
+    const pt = scenePointFromEvent(evt, svg);
     if (!pt) return;
     pos = pt;
     placeCross();
@@ -76,7 +81,7 @@ export function bindPanel(panelEl, svgEl, handlers) {
     else if (evt.key === 'ArrowUp') pos.y = Math.max(0, pos.y - step);
     else if (evt.key === 'ArrowDown') pos.y = Math.min(600, pos.y + step);
     else if (evt.key === 'Enter' || evt.key === ' ') {
-      handlers.onPick(hitDiff(pos.x, pos.y), { ...pos }, panelEl);
+      handlers.onPick(handlers.hitTest(pos.x, pos.y), { ...pos }, panelEl);
     } else if (evt.key === 'h' || evt.key === 'H') handlers.onKey('hint');
     else if (evt.key === 'r' || evt.key === 'R') handlers.onKey('restart');
     else if (evt.key === 'm' || evt.key === 'M') handlers.onKey('mute');

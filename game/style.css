@@ -516,3 +516,131 @@ footer {
   color: #6a5a9a;
   padding-bottom: 6px;
 }
+
+/* ---------- v3: scenes, streak, time bar, level select ---------- */
+.stat.scene-stat { min-width: 0; }
+.stat.scene-stat .scene-value {
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.stat.hot { border-color: var(--amber); box-shadow: 0 0 12px rgba(255, 179, 71, 0.35); }
+.stat.hot .value { color: var(--amber); }
+
+.timebar {
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.timebar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #7ad0c0, #ffb347);
+  border-radius: 4px;
+  transition: width 0.9s linear;
+}
+
+.timebar-fill.urgent { background: linear-gradient(90deg, #ff6a5c, #e8873a); }
+
+.card.wide { max-width: 860px; }
+
+/* level select: one card per scene, with a live miniature of the scene */
+.level-cards {
+  display: flex;
+  gap: 12px;
+  margin: 4px 0 16px;
+}
+
+.level-card {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  color: var(--cream);
+  font-family: inherit;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.level-card:hover, .level-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--amber);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+  outline: none;
+}
+
+.level-preview {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 5 / 3;
+}
+
+.level-preview svg { display: block; width: 100%; height: 100%; }
+
+.level-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.level-meta { font-size: 12px; color: #b9a8e8; }
+
+.level-diff {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 20px;
+}
+
+.level-diff.easy { background: rgba(122, 208, 192, 0.2); color: var(--teal); border: 1px solid var(--teal); }
+.level-diff.medium { background: rgba(255, 179, 71, 0.2); color: var(--amber); border: 1px solid var(--amber); }
+.level-diff.hard { background: rgba(255, 106, 92, 0.2); color: var(--red); border: 1px solid var(--red); }
+
+.btn.link {
+  background: none;
+  border: none;
+  color: #b9a8e8;
+  font-size: 13px;
+  font-weight: normal;
+  text-decoration: underline;
+  padding: 4px 8px;
+}
+
+.btn.link:hover { color: var(--cream); background: none; transform: none; }
+
+/* per-scene score breakdown on the final win screen */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 auto 18px;
+  max-width: 420px;
+}
+
+.break-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: #e8dcff;
+}
+
+.break-row span:first-child { font-weight: bold; color: var(--cream); }

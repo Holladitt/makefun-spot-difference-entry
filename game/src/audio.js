@@ -50,6 +50,13 @@ export function playFound() {
   tone(1320, 1320, 0.24, 'triangle', 0.1, 0.16);
 }
 
+// A bright rising arpeggio when a streak of 3+ is reached.
+export function playStreak() {
+  tone(880, 880, 0.1, 'sine', 0.16);
+  tone(1108, 1108, 0.12, 'sine', 0.16, 0.07);
+  tone(1318, 1318, 0.18, 'sine', 0.16, 0.14);
+}
+
 // A soft low thud for a miss.
 export function playMiss() {
   tone(180, 110, 0.16, 'triangle', 0.14);
